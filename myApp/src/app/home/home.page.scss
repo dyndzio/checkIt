@@ -4,11 +4,15 @@
 #welcome-page {
   background: url('/../../assets/background/background.jpg') no-repeat;
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   .logo-container {
     height: 80px;
+    width: 244px;
+    background: url('/../../assets/logo/checkit_logo.png') no-repeat;
+    background-size: contain;
+    margin: 30px auto 10px;
   }
   h2 {
     text-align: center;
@@ -54,6 +58,9 @@ button.mat-button {
   box-shadow: 0 3px 6px 0 rgba(0,0,0,0.16);
   border-radius: 10px;
   font-weight: 200;
+  &.or-register {
+    margin-bottom: 20px;
+  }
 }
 
 .forget-password {
