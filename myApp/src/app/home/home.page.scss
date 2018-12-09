@@ -1,1 +1,99 @@
 @import "../../../../myApp/src/global.scss";
+
+
+#welcome-page {
+  background: url('/../../assets/background/background.jpg') no-repeat;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .logo-container {
+    height: 80px;
+  }
+  h2 {
+    text-align: center;
+    color: white;
+    font-weight: 200;
+  }
+  h3 {
+    font-weight: 200;
+  }
+    .login-cart {
+      box-shadow: none;
+      padding: 0 50px;
+      background: transparent;
+      border-radius: 0;
+      border: 0;
+      color: white;
+
+      .mat-form-field {
+        display: block;
+      }
+    }
+
+    /deep/ .mat-form-field-appearance-legacy .mat-form-field-label {
+      color: white;
+      left: 5px;
+    }
+
+    /deep/ .mat-form-field-appearance-legacy .mat-form-field-underline {
+      background-color: white;
+    }
+
+    /deep/ .mat-form-field-appearance-legacy .mat-hint {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+}
+
+button.mat-button {
+  width: 100%;
+  border: 1px solid white;
+  font-size: 20px;
+  color: white;
+  box-shadow: 0 3px 6px 0 rgba(0,0,0,0.16);
+  border-radius: 10px;
+  font-weight: 200;
+}
+
+.forget-password {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.login {
+  &.methods {
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+    width: 165px;
+    margin: 0 auto;
+    .circle {
+      &.icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        text-align: center;
+        background: rgba( 255,255,255, 0.5);
+        svg {
+          width: 30px;
+          height: 30px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
+
+.error-displayer {
+  color: white;
+  text-align: center;
+  margin: 10px 0;
+  background: red;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/deep/ ion-tab-bar {
+  display: none;
+}

@@ -14,13 +14,13 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^7.1.1",
-    "@angular/cdk": "^7.1.0",
+    "@angular/cdk": "^7.1.1",
     "@angular/common": "~7.0.0",
     "@angular/core": "~7.0.0",
     "@angular/fire": "^5.1.0",
     "@angular/forms": "~7.0.0",
     "@angular/http": "~7.0.0",
-    "@angular/material": "^7.1.0",
+    "@angular/material": "^7.1.1",
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
@@ -29,10 +29,12 @@
     "@ionic-native/status-bar": "5.0.0-beta.21",
     "@ionic/angular": "4.0.0-beta.16",
     "@ionic/pro": "2.0.3",
+    "@mdi/font": "^3.0.39",
     "cordova-plugin-ionic": "^5.2.7",
     "core-js": "^2.5.4",
     "firebase": "^5.5.9",
     "hammerjs": "^2.0.8",
+    "ngx-materialize": "^6.1.3",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
   },
@@ -62,5 +64,8 @@
     "tslint": "~5.11.0",
     "typescript": "~3.1.6"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "config": {
+    "ionic_copy": "./config/copy.config.js"
+  }
 }

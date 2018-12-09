@@ -3,7 +3,7 @@ import { Router} from "@angular/router";
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
-import { Observable, of } from "rxjs";
+import {Observable, of, Subject} from "rxjs";
 import { switchMap } from 'rxjs/operators';
 
 interface User {
@@ -26,6 +26,7 @@ interface authManuallyLogin {
 @Injectable()
 export class AuthService {
     user: Observable<User>;
+    public errorSignIn = new Subject<any>();
     authManually = {
         email: '',
         password: ''
@@ -57,10 +58,13 @@ export class AuthService {
     }
 
     signIn(email: string, password: string) {
-        return this.authFireBase.auth.signInAndRetrieveDataWithEmailAndPassword(email, password).then((user) => {
+        return this.authFireBase.auth.signInWithEmailAndPassword(email, password).then((user) => {
             return this.setUserDoc(user);
-        }).catch(function(error) {
-            console.log(error);
+        }).catch((error: firebase.FirebaseError) => {
+            this.errorSignIn.next(
+                error.message
+            );
+            console.log(this.errorSignIn);
         });
 
     }
@@ -111,6 +115,9 @@ export class AuthService {
         return userRef.set(data);
     }
 
+    getSignInError(): Observable<any> {
+        return this.errorSignIn.asObservable();
+    }
 
 
 }
