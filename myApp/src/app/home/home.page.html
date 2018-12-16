@@ -17,15 +17,14 @@
     <img [src]="user.photoURL">
     <ion-button (click)="auth.logOut()">Log Out</ion-button>
   </div>
-
 </ng-template>
 
 <ng-template #guest class="check-it">
   <div id="welcome-page" class="mat-typography">
     <div class="logo-container">
     </div>
-    <h2>Login or Create free account</h2>
-    <div *ngIf="showRegistration" id="registration">
+    <div *ngIf="showRegistration && !showResetPassword" id="registration">
+      <h2>Login or Create free account</h2>
       <mat-card class="login-cart">
         <mat-card-content>
           <form (ngSubmit)="auth.registerUser(auth.authManually.email, auth.authManually.password)">
@@ -45,7 +44,8 @@
           </mat-card-content>
       </mat-card>
     </div>
-    <div *ngIf="!showRegistration" id="signIn">
+    <div *ngIf="!showRegistration && !showResetPassword" id="signIn">
+      <h2>Login or Create free account</h2>
       <mat-card class="login-cart">
         <mat-card-content>
         <form (ngSubmit)="auth.signIn(auth.authManuallyLogin.email, auth.authManuallyLogin.password)">
@@ -62,7 +62,7 @@
           </div>
           <div class="error-displayer" *ngIf="errorSignIn">{{errorSignIn}}</div>
         </form>
-          <div class="forget-password">
+          <div (click)="showResetPassword = !showResetPassword" class="forget-password">
             <h3>Forget Your password?</h3>
           </div>
           <div class="login methods">
@@ -75,6 +75,21 @@
             <button mat-button (click)="showRegistration = !showRegistration" class="or-register cover">
               <span *ngIf="!showRegistration">Registration</span><span *ngIf="showRegistration">Log In</span>
             </button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div *ngIf="showResetPassword">
+      <h2>Just type Your email below</h2>
+      <mat-card class="login-cart">
+        <mat-card-content>
+          <form (ngSubmit)="auth.resetPassword(auth.authResetPassword.email)">
+            <mat-form-field>
+              <input matInput type="email" name="email" label="email" placeholder="email" [(ngModel)]="auth.authResetPassword.email">
+            </mat-form-field>
+            <button mat-button type="submit">Reset Password</button>
+            <div class="forget-password"><h3 (click)="showResetPassword = !showResetPassword">Go back <i class="fas fa-sign-in-alt"></i></h3></div>
+          </form>
         </mat-card-content>
       </mat-card>
     </div>

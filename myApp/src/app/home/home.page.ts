@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../core/auth.service";
 import {FormControl, Validators} from '@angular/forms'
-
+import { AngularFireAuth } from "@angular/fire/auth";
+import { Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -12,9 +13,16 @@ import {FormControl, Validators} from '@angular/forms'
 export class HomePage implements OnInit{
     showRegistration: boolean;
     errorSignIn: any;
+    showResetPassword: any;
+    resetEmail: string;
     email = new FormControl('', [Validators.required, Validators.email]);
     password = new FormControl('', [Validators.required, Validators.minLength(8)]);
-  constructor(public auth: AuthService) {
+  constructor(public auth: AuthService, public afAuth: AngularFireAuth, private router: Router) {
+      this.afAuth.authState.subscribe(user => {
+          if (user) {
+              this.router.navigate(['user', user.uid]);
+          }
+      });
     this.auth.getSignInError().subscribe(data => {
       this.errorSignIn = data;
       setTimeout(() => {
@@ -34,7 +42,11 @@ export class HomePage implements OnInit{
             this.password.hasError('minLength') ? 'not enough characters' :
                 '';
     }
-  ngOnInit(): void {
 
-  }
+    resetPassword(email: string) {
+        this.auth.resetPassword(email)
+    }
+
+  ngOnInit(): void {
+    }
 }

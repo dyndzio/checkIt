@@ -35,6 +35,10 @@ export class AuthService {
         email: '',
         password: ''
     };
+
+    authResetPassword = {
+        email: ''
+    }
     constructor( private authFireBase: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
 
     this.user = this.authFireBase.authState.pipe(switchMap(user => {
@@ -79,8 +83,16 @@ export class AuthService {
         return this.oAuthLogin(provider);
     }
 
+    resetPassword(email: string) {
+        let auth = firebase.auth();
+        return auth.sendPasswordResetEmail(email)
+            .then(() => console.log("email sent"))
+            .catch((error) => console.log(error))
+    }
+
     logOut() {
-        return this.authFireBase.auth.signOut();
+        this.router.navigate( ['/']);
+        this.authFireBase.auth.signOut();
     }
 
 
